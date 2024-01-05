@@ -2,14 +2,20 @@ import { View, Text, StyleSheet, Image, Pressable } from 'react-native'
 import React from 'react'
 import { getColorPokemon } from '../utils/getColorPokemon.js'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useNavigation } from '@react-navigation/native' // para navegar entre pantallas con el stack navigator???
 
 const PokemonCard = ({ pokemon }) => {
 
     const bgStyles = { backgroundColor: "#f0f", ...styles.bgStyles }
     const pokemonColor = getColorPokemon(pokemon.types)
 
+    const navigation = useNavigation();
+
+    // redireccionando al detalle de un pokemon especifico
     const goToPokemon = () => {
-        console.log(`Es pokemon ${pokemon.name}`);
+        // console.log(pokemon.id);
+        navigation.navigate("Pokemon", { id: pokemon.id })
+        // el primero el Screen donde queremos ir y el otro los Parametros que le queremos pasar en un objeto de configuracion que es route.params
     }
 
     return (
