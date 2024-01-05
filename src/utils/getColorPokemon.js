@@ -12,4 +12,8 @@ const getColorPokemon = (types) => {
     }
 };
 
-export { getColorPokemon }
+const getColorOfOneType = (type) => {
+    return POKEMON_TYPE_COLORS[type];
+}
+
+export { getColorPokemon, getColorOfOneType }

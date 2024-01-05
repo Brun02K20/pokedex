@@ -2,6 +2,7 @@ import { View, Text, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { getPokemonDetailApi } from '../api/pokemon.js'
 import { Header } from '../components/Pokemon/Header.js'
+import { Types } from '../components/Pokemon/Types.js'
 
 const PokemonScreen = ({ route, navigation }) => {
     console.log(route.params.id)
@@ -36,6 +37,9 @@ const PokemonScreen = ({ route, navigation }) => {
                         : null,
                     ]
                 }
+            />
+            <Types
+                types={pokemon.types}
             />
         </ScrollView>
     )
