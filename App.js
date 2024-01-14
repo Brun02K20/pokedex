@@ -2,12 +2,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Navigation } from './src/navigation/Navigation.js'; // importo el sistema de navegacion
+import { AuthProvider } from './src/context/AuthContext.js';
 
 export default function App() {
   return (
     // envuelvo toda la app con el Navigation contaioner para que se pueda navegar por toda la app
     <NavigationContainer>
-      <Navigation />
+      <AuthProvider>
+        <Navigation />
+      </AuthProvider>
     </NavigationContainer>
   );
 }

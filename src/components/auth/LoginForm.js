@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 import { useForm, Controller } from 'react-hook-form';
 import { user, userDetails } from '../../utils/userDB.js';
+import useAuth from '../../hooks/useAuth.js';
 
 const LoginForm = () => {
     const { register, setValue, formState: { errors }, reset, handleSubmit, control } = useForm({
@@ -13,6 +14,9 @@ const LoginForm = () => {
 
     const [loginError, setLoginError] = useState(false);
 
+    // extrayendo los datos de mi contexto
+    const { login } = useAuth()
+
     const onSubmit = (data) => {
         console.log("lo que ingreso el usuario: ", data)
         if (data.userName !== user.username || data.password !== user.password) {
@@ -20,6 +24,7 @@ const LoginForm = () => {
             return
         }
         setLoginError(false)
+        login(userDetails)
         reset()
     }
 
