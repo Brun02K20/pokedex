@@ -5,18 +5,14 @@ import { Header } from '../components/Pokemon/Header.js'
 import { Types } from '../components/Pokemon/Types.js'
 import { Stats } from '../components/Pokemon/Stats.js'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Favorite } from '../components/Pokemon/Favorite.js';
+import useAuth from "../hooks/useAuth.js";
 
 const PokemonScreen = ({ route, navigation }) => {
     console.log(route.params.id)
 
     const [pokemon, setPokemon] = useState(null)
-
-    useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => null,
-            headerLeft: () => <Icon name='arrow-left' color="white" size={20} style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}></Icon>
-        })
-    }, [navigation, route])
+    const { auth } = useAuth()
 
     const loadPokemon = async () => {
         try {
@@ -31,6 +27,13 @@ const PokemonScreen = ({ route, navigation }) => {
     useEffect(() => {
         loadPokemon()
     }, [route])
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (auth ? <Favorite pokemonId={pokemon?.id} /> : null),
+            headerLeft: () => <Icon name='arrow-left' color="white" size={20} style={{ marginLeft: 20 }} onPress={() => navigation.goBack()}></Icon>
+        })
+    }, [navigation, route, pokemon, auth])
 
     if (!pokemon) return null
     return (
