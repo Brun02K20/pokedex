@@ -24,18 +24,6 @@ const Pokedex = () => {
 
             for await (const pok of response.results) {
                 const pokDetail = await getPokemonDetailByUrlApi(pok.url)
-                console.log("detalle del bicho: ", {
-                    id: pokDetail.id,
-                    name: pokDetail.name,
-                    types: [
-                        pokDetail.types[0].type.name,
-                        pokDetail.types.length > 1
-                            ? pokDetail.types[1].type.name
-                            : null,
-                    ],
-                    order: pokDetail.order,
-                    image: pokDetail.sprites.other['official-artwork'].front_default
-                })
                 pokemonArray.push({
                     id: pokDetail.id,
                     name: pokDetail.name,
